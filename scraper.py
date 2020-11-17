@@ -1,6 +1,7 @@
 
 # ADD YOUR IMPORTS BEFORE THIS LINE
-
+>>> import requests
+>>> url = requests.get('http://books.toscrape.com/')
 # Use this function to write information about ONE book
 # to the result file
 # It takes a string as input, this string should have the following format
