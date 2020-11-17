@@ -13,3 +13,8 @@ def write_line(line):
         file.write('\n')
 
 # WRITE YOUR CODE BELOW THIS LINE
+import requests
+
+x = requests.get('http://books.toscrape.com/catalogue/category/books_1/index.html')
+
+
