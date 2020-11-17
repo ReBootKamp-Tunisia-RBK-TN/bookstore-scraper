@@ -13,3 +13,20 @@ def write_line(line):
         file.write('\n')
 
 # WRITE YOUR CODE BELOW THIS LINE
+
+import requests
+URL = 'http://books.toscrape.com/'
+response = requests.get(URL)
+page = response.content
+
+from bs4 import BeautifulSoup
+
+soup = BeautifulSoup(page, 'html.parser')
+
+book = soup.find('div', class_='product_pod')
+
+bookname = book.find_all('h3')
+for n in bookname:
+    print(n.get_text())
+    links = n.find_all('a')
+    print()
