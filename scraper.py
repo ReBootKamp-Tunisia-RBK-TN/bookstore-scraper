@@ -1,4 +1,5 @@
-
+from bs4 import BeautifulSoup
+import urlLib.request
 # ADD YOUR IMPORTS BEFORE THIS LINE
 
 # Use this function to write information about ONE book
@@ -12,4 +13,5 @@ def write_line(line):
         file.write(line)
         file.write('\n')
 
-# WRITE YOUR CODE BELOW THIS LINE
+# WRITE YOUR CODE BELOW THIS LINE-
+url_templale="http://books.toscrape.com/"
