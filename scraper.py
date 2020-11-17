@@ -1,4 +1,5 @@
-
+from bs4 import BeautifulSoup
+import requests
 # ADD YOUR IMPORTS BEFORE THIS LINE
 
 # Use this function to write information about ONE book
@@ -13,3 +14,8 @@ def write_line(line):
         file.write('\n')
 
 # WRITE YOUR CODE BELOW THIS LINE
+url = 'http://books.toscrape.com/'
+page = requests.get(url)
+soup = BeautifulSoup(page.content, 'html.parser')
+results = soup.find(id='default')
+prices = results.find_all('section', class_='product_price')
