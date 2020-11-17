@@ -16,19 +16,21 @@ def write_line(line):
 
 # WRITE YOUR CODE BELOW THIS LINE
 
-url_template = 'http://books.toscrape.com/'
+url_template = 'http://books.toscrape.com/catalogue/page-{}.html'
 
-# GET URL
-resp = urllib.request.urlopen(url_template)
-page_html = resp.read() # Read the HTML response
-resp.close() # Closes the connection to the url
-page_soup = BeautifulSoup(page_html, "html.parser")
+for pageCount in range(1,51):
+    # GET URL
+    print('fetching page {}'.format(pageCount))
+    resp = urllib.request.urlopen(url_template.format(pageCount))
+    page_html = resp.read() # Read the HTML response
+    resp.close() # Closes the connection to the url
+    page_soup = BeautifulSoup(page_html, "html.parser")
 
-books = page_soup.find_all("article", {"class":"product_pod"})
-for book_element in books:
-    # Locate html element that contains the book title
-    title_element = book_element.find("h3").find('a')
-    name = title_element['title']
-    url = title_element['href']
-    price = book_element.find("p",{"class": "price_color"}).text
-    write_line("{},{},{}".format(name,price,url))
+    books = page_soup.find_all("article", {"class":"product_pod"})
+    for book_element in books:
+        # Locate html element that contains the book title
+        title_element = book_element.find("h3").find('a')
+        name = title_element['title']
+        url = title_element['href']
+        price = book_element.find("p",{"class": "price_color"}).text
+        write_line("{},{},{}".format(name,price,url))
