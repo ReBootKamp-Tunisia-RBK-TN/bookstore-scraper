@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 # ADD YOUR IMPORTS BEFORE THIS LINE
 
-# Use this function to write information about ONE book
+# Use this function to write information about ONE book_element
 # to the result file
 # It takes a string as input, this string should have the following format
 # line = book_name,book_price,book_url
@@ -24,4 +24,11 @@ page_html = resp.read() # Read the HTML response
 resp.close() # Closes the connection to the url
 page_soup = BeautifulSoup(page_html, "html.parser")
 
-articles = page_soup.find_all("article", {"class":"product_pod"})
+books = page_soup.find_all("article", {"class":"product_pod"})
+for book_element in books:
+    # Locate html element that contains the book title
+    title_element = book_element.find("h3").find('a')
+    name = title_element['title']
+    url = title_element['href']
+    price = book_element.find("p",{"class": "price_color"}).text
+    write_line("{},{},{}".format(name,price,url))
